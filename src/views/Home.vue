@@ -1,10 +1,16 @@
 <template>
   <div class="home">
-  
+    
     <md-field class="pk">
       <label>Private Key:</label>
       <md-input v-model="pk" type="password"></md-input>
       <span class="md-helper-text">All the bitcoin magic takes place on the client side, so your private key is safe.</span>
+    </md-field>
+
+    <md-field class="title">
+      <label>Title:</label>
+      <md-input v-model="title"></md-input>
+      <span class="md-helper-text">Optional title.</span>
     </md-field>
 
     <md-field class="payload">
@@ -17,6 +23,14 @@
       <md-button class="md-raised md-primary moist-button" v-on:click="moistit">Moist It Up!</md-button>
     </div>
 
+    <div class="error-sending" v-if="viewObject.error">
+      Error: {{viewObject.errormessage}}
+    </div>
+
+    <div class="success-sending" v-if="viewObject.success">
+      Success: Transaction on chain {{viewObject.txHash}}
+    </div>
+
   </div>
 </template>
 
@@ -25,12 +39,17 @@
     .payload {
       margin-bottom: 42px;
     }
-    .pk {
+    .pk,
+    .title {
       margin-bottom: 47px;
     }
     .moist-button {
       margin: 0px;
       width: 100%;
+    }
+    .error-sending,
+    .success-sending {
+      margin-top: 28px;
     }
   }
 </style>
@@ -38,14 +57,45 @@
 <script>
   export default {
     name: 'home',
-    data: () => ({
-      pk: null,
-      payload: null
-    }),
+    data: function() {
+      return {
+        pk: null,
+        title: null,
+        payload: null,
+        viewObject: {
+          txHash: null,
+          success: false,
+          error: false,
+          errormessage: null
+        }
+      }
+    },
     methods: {
-      moistit: function(event) {
-        console.log(this.pk)
-        console.log(this.payload)
+      moistit: function() {
+        let title = "0x" + new Buffer(this.title).toString('hex')
+        let payload = "0x" + new Buffer(this.payload).toString('hex')
+        let viewObject = this.viewObject
+
+        let transaction = {
+          data: [title, payload],
+          pay: {
+            key: this.pk
+          }
+        }
+
+        console.log(transaction)
+
+        datapay.send(transaction, function(error, hash) {
+          if (error) {
+            viewObject.errormessage = error
+            viewObject.error = true
+            console.log(error)
+          } else {
+            console.log(hash)
+            viewObject.txHash = hash
+            viewObject.success = true
+          }
+        })
       }
     }
   }
