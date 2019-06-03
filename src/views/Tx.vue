@@ -17,9 +17,7 @@
 
           <md-content v-if="decodedTx.payload.clean">
             <h3>Payload:</h3>
-            <md-field>
-              <md-textarea readonly style="height: 320px; max-height: 500px;" v-model="decodedTx.payload.clean"></md-textarea>
-            </md-field>
+            <pre><code v-html="decodedTx.payload.clean" class="plaintext"></code></pre>
 
             <md-field>
               <label>hex:</label>
@@ -36,7 +34,7 @@
 
         <md-tab id="tab-raw-tx" md-label="Raw Tx">
           <md-field>
-            <md-textarea readonly v-html="txObject[0]" style="height: 320px; max-height: 500px;"></md-textarea>
+            <pre><code v-html="txObject[0]" class="plaintext"></code></pre>
           </md-field>
         </md-tab>
       </md-tabs>
@@ -94,7 +92,6 @@ import { decode } from 'punycode';
               txObject.push(parsedBody)
 
               let load = parsedBody.vout[0].scriptPubKey.asm.split(" ")
-              console.log(load)
               if (load.length == 3) {
                 decodedTx.title.hex = load[1]
                 decodedTx.title.clean = new Buffer(load[1], 'hex').toString()

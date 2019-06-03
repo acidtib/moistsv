@@ -41,7 +41,6 @@
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    font-family: Roboto Mono,monospace;
   }
   .header-logo {
     margin: 31px 0px 0px 5px;
