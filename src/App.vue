@@ -26,7 +26,7 @@
     <footer class="main-footer">
       <div class="main-footer-container">
         <div class="main-footer-section">
-          <a href="https://github.com/arubinofaux/moistsv" target="_blank">Click here to review the code in Github</a>
+          <a href="https://github.com/arubinofaux/moistsv" target="_blank">Code in Github</a>
         </div>
         <div class="main-footer-section">
           <a href="https://twitter.com/acidtib_" target="_blank">Made with <span class="red">❤</span> by acidtib_</a>
