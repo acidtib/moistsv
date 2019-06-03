@@ -28,6 +28,12 @@
           </md-content>
         </md-tab>
 
+        <md-tab id="tab-render-op" md-label="Render OP_RETURN">
+          <md-field>
+            <div v-html="decodedTx.payload.clean"></div>
+          </md-field>
+        </md-tab>
+
         <md-tab id="tab-raw-tx" md-label="Raw Tx">
           <md-field>
             <md-textarea readonly v-html="txObject[0]" style="height: 320px; max-height: 500px;"></md-textarea>
