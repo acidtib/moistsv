@@ -72,12 +72,20 @@
     },
     methods: {
       moistit: function() {
-        let title = "0x" + new Buffer(this.title).toString('hex')
+        let toMoist = []
+        if (this.title) {
+          let title = "0x" + new Buffer(this.title).toString('hex')
+          toMoist.push(title)
+        }
+        
         let payload = "0x" + new Buffer(this.payload).toString('hex')
+        toMoist.push(payload)
+
         let viewObject = this.viewObject
+        let innerRouter = this.$router
 
         let transaction = {
-          data: [title, payload],
+          data: toMoist,
           pay: {
             key: this.pk
           }
@@ -94,6 +102,8 @@
             console.log(hash)
             viewObject.txHash = hash
             viewObject.success = true
+            
+            setTimeout(function() { innerRouter.replace('/tx/'+hash) }, 1000)
           }
         })
       }
