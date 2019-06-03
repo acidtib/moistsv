@@ -1,5 +1,12 @@
 <template>
   <div class="home">
+    <div class="hello-notice">
+      <h2>Notice:</h2>
+      <p>Moistsv.com is a simple proof-of-concept for storing data on the BitcoinSV chain, <br> don't moist it up with some illegal shit, use this tool for science and trolling.</p>
+      <p>For feedback or just to call me a wanker, hit me up on twitter <a href="https://twitter.com/acidtib_" target="_blank">@acidtib_</a></p>
+    </div>
+
+    <md-divider></md-divider>
     
     <md-field class="pk">
       <label>Private Key:</label>
@@ -37,11 +44,11 @@
 <style lang="scss" scoped>
   .home {
     .payload {
-      margin-bottom: 42px;
+      margin: 36px 0px 57px 0px;
     }
     .pk,
     .title {
-      margin-bottom: 47px;
+      margin-bottom: 49px;
     }
     .moist-button {
       margin: 0px;
