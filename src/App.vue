@@ -10,10 +10,10 @@
           </div>
 
           <div class="md-toolbar-section-end search-txs">
-            <md-field md-inline>
+            <!-- <md-field md-inline>
               <label>Search Transaction Hash</label>
               <md-input v-model="txhash"></md-input>
-            </md-field>
+            </md-field> -->
           </div>
         </div>
       </md-app-toolbar>
