@@ -7,17 +7,31 @@
         <md-tab id="tab-details" md-label="Details">
           <md-content v-if="decodedTx.title.clean">
             <h3>Title:</h3>
-            <p>{{decodedTx.title}}</p>
+            <p>{{decodedTx.title.clean}}</p>
+            <md-field>
+              <label>hex:</label>
+              <md-input readonly v-model="decodedTx.title.hex"></md-input>
+            </md-field>
           </md-content>
+
 
           <md-content v-if="decodedTx.payload.clean">
             <h3>Payload:</h3>
-            <p>{{decodedTx.payload}}</p>
+            <md-field>
+              <md-textarea readonly style="height: 320px; max-height: 500px;" v-model="decodedTx.payload.clean"></md-textarea>
+            </md-field>
+
+            <md-field>
+              <label>hex:</label>
+              <md-textarea readonly v-model="decodedTx.payload.hex"></md-textarea>
+            </md-field>
           </md-content>
         </md-tab>
 
         <md-tab id="tab-raw-tx" md-label="Raw Tx">
-          <code>{{txObject[0]}}</code>
+          <md-field>
+            <md-textarea readonly v-html="txObject[0]" style="height: 320px; max-height: 500px;"></md-textarea>
+          </md-field>
         </md-tab>
       </md-tabs>
 
@@ -54,6 +68,9 @@ import { decode } from 'punycode';
       this.fetchTx()
     },
     methods: {
+      pretty: function() {
+        return JSON.stringify(txObject[0], undefined, 2);
+      },
       fetchTx: function() {
         let txId = this.$route.params.txHash
         let txObject = this.txObject
