@@ -32,7 +32,7 @@
 
             <h3>Rendered OP_RETURN:</h3>
             <div>
-              <div>{{decodedTx.payload.clean}}</div>
+              <div v-html="decodedTx.payload.clean"></div>
             </div>
           </md-content>
         </md-tab>
