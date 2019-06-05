@@ -111,6 +111,11 @@ export default {
   data: () => ({
     menuVisible: false,
     txhash: null
-  })
+  }),
+  methods: {
+    track () {
+      this.$ga.page('/')
+    }
+  }
 }
 </script>
