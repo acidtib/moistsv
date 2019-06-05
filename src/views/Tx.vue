@@ -17,19 +17,24 @@
 
           <md-content v-if="decodedTx.payload.clean">
             <h3>Payload:</h3>
-            <pre><code v-html="decodedTx.payload.clean" class="plaintext"></code></pre>
+            <md-field>
+              <md-textarea readonly v-model="decodedTx.payload.clean"></md-textarea>
+            </md-field>
+
+            <md-divider style="margin-bottom: 15px;"></md-divider>
 
             <md-field>
               <label>hex:</label>
               <md-textarea readonly v-model="decodedTx.payload.hex"></md-textarea>
             </md-field>
-          </md-content>
-        </md-tab>
 
-        <md-tab id="tab-render-op" md-label="Render OP_RETURN">
-          <md-field>
-            <div v-html="decodedTx.payload.clean"></div>
-          </md-field>
+            <md-divider style="margin-bottom: 15px;"></md-divider>
+
+            <h3>Rendered OP_RETURN:</h3>
+            <div>
+              <div>{{decodedTx.payload.clean}}</div>
+            </div>
+          </md-content>
         </md-tab>
 
         <md-tab id="tab-raw-tx" md-label="Raw Tx">
@@ -49,7 +54,6 @@
 </template>
 
 <script>
-import { decode } from 'punycode';
   export default {
     name: 'tx',
     data: function() {
@@ -64,7 +68,8 @@ import { decode } from 'punycode';
           payload: {
             hex: null,
             clean: null
-          }
+          },
+          type: "default"
         }
       }
     },
@@ -104,6 +109,9 @@ import { decode } from 'punycode';
                 decodedTx.payload.hex = load[1]
                 decodedTx.payload.clean = new Buffer(load[1], 'hex').toString()
               }
+
+              // if (decodedTx.payload.clean.includes('blockquote class="twitter-tweet"')) {
+              // }
             } else {
               errorObject.push(parsedBody)
             }
