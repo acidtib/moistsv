@@ -113,9 +113,7 @@ export default {
     txhash: null
   }),
   methods: {
-    track () {
-      this.$ga.page('/')
-    }
+    
   }
 }
 </script>
